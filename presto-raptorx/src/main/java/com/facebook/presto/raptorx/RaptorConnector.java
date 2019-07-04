@@ -44,7 +44,6 @@ import java.util.Set;
 
 import static com.facebook.presto.spi.transaction.IsolationLevel.REPEATABLE_READ;
 import static com.facebook.presto.spi.transaction.IsolationLevel.checkConnectorSupports;
-import static com.google.common.base.Verify.verify;
 import static java.util.Objects.requireNonNull;
 
 public class RaptorConnector
