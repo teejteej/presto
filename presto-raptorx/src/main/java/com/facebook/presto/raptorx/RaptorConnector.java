@@ -212,7 +212,7 @@ public class RaptorConnector
     public synchronized void beginBlock(long tableId, long transactionId)
     {
         boolean isFirst = !maintenances.containsKey(tableId);
-        verify(maintenances.put(tableId, transactionId));
+        maintenances.put(tableId, transactionId);
         if (isFirst) {
             transactionWriter.blockMaintenance(tableId);
         }
