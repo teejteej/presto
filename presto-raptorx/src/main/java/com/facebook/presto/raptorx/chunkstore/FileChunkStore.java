@@ -51,7 +51,8 @@ public class FileChunkStore
     @PostConstruct
     public void start()
     {
-        createDirectories(baseDir);
+        // Don't create base directoty: we assume it already exists (e.g. mounted volume)
+        //createDirectories(baseDir);
     }
 
     @Override
