@@ -44,6 +44,7 @@ import java.util.Set;
 
 import static com.facebook.presto.spi.transaction.IsolationLevel.REPEATABLE_READ;
 import static com.facebook.presto.spi.transaction.IsolationLevel.checkConnectorSupports;
+import static com.google.common.base.Verify.verify;
 import static java.util.Objects.requireNonNull;
 
 public class RaptorConnector
@@ -211,7 +212,7 @@ public class RaptorConnector
     public synchronized void beginBlock(long tableId, long transactionId)
     {
         boolean isFirst = !maintenances.containsKey(tableId);
-        maintenances.put(tableId, transactionId);
+        verify(maintenances.put(tableId, transactionId));
         if (isFirst) {
             transactionWriter.blockMaintenance(tableId);
         }
