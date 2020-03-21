@@ -80,6 +80,7 @@ public class ChunkOrganizationManager
     private final boolean enabled;
     private final long organizationIntervalMillis;
     private final long organizationDiscoveryIntervalMillis;
+    private final Duration organizationDiscoveryInterval;
 
     private final String currentNodeIdentifier;
     private final long currentNodeId;
@@ -141,6 +142,7 @@ public class ChunkOrganizationManager
         requireNonNull(organizationInterval, "organizationInterval is null");
         this.organizationIntervalMillis = max(1, organizationInterval.roundTo(MILLISECONDS));
         this.organizationDiscoveryIntervalMillis = max(1, organizationDiscoveryInterval.roundTo(MILLISECONDS));
+        this.organizationDiscoveryInterval = organizationDiscoveryInterval;
     }
 
     @PostConstruct
@@ -164,7 +166,8 @@ public class ChunkOrganizationManager
         discoveryService.scheduleWithFixedDelay(() -> {
             try {
                 // jitter to avoid overloading database and overloading the backup store
-                SECONDS.sleep(ThreadLocalRandom.current().nextLong(1, organizationDiscoveryIntervalMillis));
+                long seconds = (long) organizationDiscoveryInterval.convertTo(SECONDS).getValue();
+                SECONDS.sleep(ThreadLocalRandom.current().nextLong(1, seconds));
 
                 log.info("Running chunk organizer...");
                 submitJobs(discoverAndInitializeTablesToOrganize());
