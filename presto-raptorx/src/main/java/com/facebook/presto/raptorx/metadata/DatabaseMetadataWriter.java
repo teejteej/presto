@@ -375,8 +375,8 @@ public class DatabaseMetadataWriter
             boolean nameExists = columns.stream().anyMatch(info -> info.getColumnName().equals(column.getColumnName()));
             checkConflict(!nameExists, "Column already exists: %s", column.getColumnName());
 
-            boolean ordinalExists = columns.stream().anyMatch(info -> info.getColumnId() == column.getOrdinal());
-            checkConflict(!ordinalExists, "Column ordinal already exists");
+            boolean ordinalExists = columns.stream().anyMatch(info -> info.getOrdinal() == column.getOrdinal());
+            checkConflict(!ordinalExists, "Column ordinal already exists: commitId(%s) tableId(%s) ordinal(%s)", commitId, tableId, column.getOrdinal());
 
             insertColumn(dao, commitId, tableId, column);
 
