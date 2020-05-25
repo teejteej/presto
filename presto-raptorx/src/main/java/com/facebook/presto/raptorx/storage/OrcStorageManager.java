@@ -334,7 +334,7 @@ public class OrcStorageManager
     private OrcDataSource openChunk(long tableId, long chunkId, ReaderAttributes readerAttributes)
     {
         File file = storageService.getStorageFile(chunkId).getAbsoluteFile();
-        log.info("tableID: %d, chunkId: %d, file: %s", tableId, chunkId, file.getAbsolutePath());
+        log.debug("tableID: %d, chunkId: %d, file: %s", tableId, chunkId, file.getAbsolutePath());
         if (!file.exists()) {
             try {
                 Future<?> future = recoveryManager.recoverChunk(tableId, chunkId);

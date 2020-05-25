@@ -132,7 +132,7 @@ public class DatabaseMetadata
     @Override
     public void registerTransactionTable(long transactionId, long tableId)
     {
-        masterTransactionDao.insertTransactionTable(transactionId, System.currentTimeMillis());
+        // masterTransactionDao.insertTransactionTable(transactionId, tableId);
     }
 
     @Override

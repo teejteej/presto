@@ -55,8 +55,8 @@ public class CommitCleaner
 {
     private static final Logger log = Logger.get(CommitCleaner.class);
 
-    private static final Duration FAILED_TRANSACTION_AGE = Duration.ofHours(1);
-    private static final Duration WORKER_TRANSACTION_AGE = Duration.ofDays(2);
+    private static final Duration FAILED_TRANSACTION_AGE = Duration.ofMinutes(5);
+    private static final Duration WORKER_TRANSACTION_AGE = Duration.ofHours(2);
     private final int chunkBatchSize;
 
     private final TransactionManager transactionManager;
